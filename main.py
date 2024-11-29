@@ -89,20 +89,17 @@ class Road:
 
 stime = time.time()
 
+# input :  topo(geo.Mesh), road_centerlines(List[geo.Curve]), road_regions(List[geo.Curve]), steep_percentage(float)
+
 roads = [Road(centerline) for centerline in road_centerlines]
-# # 테스트 코드
-# roads = roads[150:250]
 
 steep_roads = []
 for road in roads:
-    print("ROAD START")
 
     # road의 height 설정
     is_height_available = road.set_height(topo)
     if not is_height_available:
         continue
-
-    print("ROAD SET HEIGHT SUCCEED", road.height)
 
     # 가파른 도로 처리
     if not road.is_steep(steep_percentage):
@@ -124,7 +121,7 @@ for road in roads:
 output = (
     "Total Roads = "
     + str(len(roads))
-    + "\n"  # 백슬래시 사용
+    + "\n"
     + "Steep Roads = "
     + str(len(steep_roads))
     + "\n"
